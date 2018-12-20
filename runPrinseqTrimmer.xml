@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tool id="runPrinseq" name="PRINSEQ Sequence Trimmer:" version="0.20.4">
+    <description>
+        Use PRINSEQ to trim and discard reads and read sections.
+    </description>
+    <!-- Call the runPrinseqTrimmer script, set input parameters according to
+         user choices. -->
+    <command interpreter="bash">
+        runPrinseqTrimmer.sh -f ${fisInput.rbInput} -w ${disForward}
+                             -r ${disReverse} -l ${disLength} -b ${disBelow}
+                             -a ${disAbove} -g ${disBelowGC} -c ${disAboveGC}
+                             -q ${disBelowMean} -u ${disAboveMean}
+        #if $fisInput.rbInput == "single"
+            -i $fisInput.fisFastq -o $fosFastq
+        #elif $fisInput.rbInput == "zip"
+            -i $fisInput.fisZip -o $fosZip
+        #end if
+    </command>
+    <inputs>
+        <!-- Catch the input file. -->
+        <conditional name="fisInput">
+            <param name="rbInput" type="select" label="FastQ or zip?"
+                   multiple="false">
+                <option value="single" selected="true">FastQ file</option>
+                <option value="zip">Zip file</option>
+            </param>
+            <!-- Catch the single input file -->
+            <when value="single">
+                <param name="fisFastq" type="data" format="fastq"
+                       label="FastQ file."/>
+            </when>
+            <!-- Catch multiple input files -->
+            <when value="zip">
+                <param name="fisZip" type="data" format="zip"
+                       label="Zip file."/>
+            </when>
+        </conditional>
+        <!-- Catch trimming options. -->
+        <param name="disForward" type="integer"
+               label="Trim reads at the 5'-end" value="0" min="0"/>
+        <param name="disReverse" type="integer"
+               label="Trim reads at the 3'-end" value="0" min="0"/>
+        <param name="disLength" type="integer"
+               label="Trim reads from 3'-end to certain length" value="0"
+               min="0"/>
+        <param name="disBelow" type="integer"
+               label="Discard reads below certain length" value="0" min="0"/>
+        <param name="disAbove" type="integer"
+               label="Discard reads above certain length" value="0" min="0"/>
+        <param name="disBelowGC" type="integer"
+               label="Discard reads below certain GC content" value="0"
+               min="0"/>
+        <param name="disAboveGC" type="integer"
+               label="Discard reads above certain GC content" value="0"
+               min="0"/>
+        <param name="disBelowMean" type="integer"
+               label="Discard reads below certain mean quality score" value="0"
+               min="0"/>
+        <param name="disAboveMean" type="integer"
+               label="Discard reads above certain mean quality score" value="0"
+               min="0"/>
+    </inputs>
+    <outputs>
+        <!-- Catch the output file. -->
+        <data format="fastq" name="fosFastq" label="Trimmed_FastQ">
+            <filter>fisInput["rbInput"] == "single"</filter>
+        </data>
+        <data format="zip" name="fosZip" label="Trimmed_Zip">
+            <filter>fisInput["rbInput"] == "zip"</filter>
+        </data>
+    </outputs>
+    <tests>
+    </tests>
+    <help>
+        .. class:: infomark
+
+        The PRINSEQ tool will trim and discard reads and read sections based on
+        user input and quality thresholds.
+
+        .. class:: warningmark
+
+        Files in fastQ format should always have a .fastq extension.
+
+--------
+
+        Source(s):
+            - **Schmieder R, Edwards R**, Quality control and preprocessing of
+              metagenomic datasets.
+              Bioinformatics. 2011; 27(6): 863-864.
+              **doi: 10.1093/bioinformatics/btr026**
+              http://prinseq.sourceforge.net/
+    </help>
+</tool>
