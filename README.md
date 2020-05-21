@@ -1,4 +1,7 @@
 # galaxy-tool-prinseq-sequence-trimmer
+
+__!!Repo can be deleted, copy is also kept [here](https://github.com/JasperBoom/galaxy-tools-naturalis-internship)!!.__
+
 Use PRINSEQ to trim and discard reads and read sections.  
 The PRINSEQ tool will trim and discard reads and read sections based on user input and quality thresholds.
 
@@ -47,10 +50,27 @@ Edit the following file in order to make galaxy display the tool.
 ```
 
 ## Source(s)
-* __Schmieder R, Edwards R__, Quality control and preprocessing of metagenomic datasets.  
+* __Schmieder R, Edwards R__,  
+  Quality control and preprocessing of metagenomic datasets.  
   Bioinformatics. 2011; 27(6): 863-864. __doi: 10.1093/bioinformatics/btr026__  
   [PRINSEQ](http://prinseq.sourceforge.net/)
 * __Giardine B, Riemer C, Hardison RC, Burhans R, Elnitski L, Shah P__,  
   Galaxy: A platform for interactive large-scale genome analysis.  
-  Genome Research. 2005; 15(10) 1451-1455 __doi: 10.1101/gr.4086505__  
-  [GALAXY](https://www.galaxyproject.org/)
+  Genome Research. 2005; 15(10) 1451-1455. __doi: 10.1101/gr.4086505__  
+  [Galaxy](https://www.galaxyproject.org/)
+
+```
+Copyright (C) 2018 Jasper Boom
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License version 3 as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+```
